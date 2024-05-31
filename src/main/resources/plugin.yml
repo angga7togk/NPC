@@ -1,5 +1,5 @@
 name: NPC
-version: "${pom.version}"
+version: 2.7.1
 api: ["1.0.14"]
 author: PetteriM1
 main: idk.plugin.npc.NPC

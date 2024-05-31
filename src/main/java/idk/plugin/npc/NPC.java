@@ -4,6 +4,7 @@ import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.entity.Entity;
 import cn.nukkit.plugin.PluginBase;
+import cn.nukkit.utils.Config;
 import idk.plugin.npc.entities.*;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ public class NPC extends PluginBase {
 
     static List<Long> cmd_id = new ArrayList<>();
     static List<Long> cmd_kill = new ArrayList<>();
-
+    static Config config;
     @Override
     public void onLoad() {
         registerNPCs();
@@ -22,6 +23,10 @@ public class NPC extends PluginBase {
     @Override
     public void onEnable() {
         getServer().getPluginManager().registerEvents(new EventListener(), this);
+        this.saveResource("config.yml");
+        config = new Config(getDataFolder() + "/config.yml", Config.YAML);
+
+        this.getServer().getScheduler().scheduleRepeatingTask(this, new QueryTask(),20 * config.getInt("query.schedule.update", 30), config.getBoolean("query.schedule.async", true));
     }
 
     private static void registerNPCs() {

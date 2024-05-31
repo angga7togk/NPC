@@ -1,0 +1,6 @@
+query:
+  format-online: "§aOnline: §b%online%§f/§e%max-online%"
+  format-offline: "§cServer Offline!"
+  schedule:
+    update: 30 # second
+    async: true # enable this if server lagging
